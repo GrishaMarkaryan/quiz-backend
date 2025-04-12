@@ -6,8 +6,15 @@ const quizRoutes = require('./api/routes/quizRoutes');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
-app.use(express.json());
+// Middleware
+app.use(cors());  // Для кросс-доменных запросов
+app.use(express.json());  // Для парсинга JSON в теле запросов
+
+// Простой маршрут для проверки работы сервера
+app.get('/', (req, res) => {
+    res.send('Hello, this is your quiz backend!');
+  });
+
 
 // Routes
 app.use('/api/quiz', quizRoutes);
