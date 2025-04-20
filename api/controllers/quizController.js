@@ -50,16 +50,27 @@ const generateQuiz = async (req, res) => {
 
 // Заменил generateQuiz на этот код для теста
 const generateQuiz = async (req, res) => {
-    const mockQuiz = {
-        quiz: [
-            {
-                question: "Что такое JavaScript?",
-                options: ["Язык разметки", "Язык программирования", "База данных", "Графический редактор"],
-                correctAnswer: 1
-            }
-        ]
-    };
-    res.json(mockQuiz);
+    try {
+        const { topic } = req.body;
+        if (!topic) {
+          return res.status(400).json({ error: "Topic is required" });
+        }
+        // Мок или запрос к DeepSeek API
+        const mockQuiz = {
+            quiz: [
+                {
+                    question: "Что такое JavaScript?",
+                    options: ["Язык разметки", "Язык программирования", "База данных", "Графический редактор"],
+                    correctAnswer: 1
+                }
+            ]
+        };
+        res.json(mockQuiz);
+
+        } catch (error) {
+            console.error("Error:", error);
+            res.status(500).json({ error: "Failed to generate quiz" });
+        }
 };
 
 module.exports = { generateQuiz };
