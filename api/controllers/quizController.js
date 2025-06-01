@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-/*
+
 const generateQuiz = async (req, res) => {
     try {
         const { topic } = req.body;
@@ -28,7 +28,9 @@ const generateQuiz = async (req, res) => {
             {
                 model: "deepseek-chat",
                 messages: [{ role: "user", content: prompt }],
-                temperature: 0.7
+                temperature: 0.7,
+                max_tokens: 1000, 
+                response_format: { type: "json_object" } 
             },
             {
                 headers: {
@@ -46,9 +48,9 @@ const generateQuiz = async (req, res) => {
         res.status(500).json({ error: 'Failed to generate quiz' });
     }
 };
-*/
 
-// Заменил generateQuiz на этот код для теста
+
+/*
 const generateQuiz = async (req, res) => {
     try {
         const { topic } = req.body;
@@ -72,5 +74,5 @@ const generateQuiz = async (req, res) => {
             res.status(500).json({ error: "Failed to generate quiz" });
         }
 };
-
+*/
 module.exports = { generateQuiz };
